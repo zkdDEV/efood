@@ -67,7 +67,7 @@ const Home = () => {
   return (
     <>
       <Hero />
-      <StoresSection size="2columns" products={megaData} />
+      <StoresSection products={megaData} />
     </>
   )
 }

@@ -2,7 +2,7 @@ import { Data } from '../../models/Data'
 
 import Header from '../../components/Header'
 import Banner from '../../components/Banner'
-import StoresSection from '../../components/StoresSection'
+import Products from '../../components/Products'
 
 import pizza from '../../assets/images/pizza_marguerita.png'
 
@@ -68,7 +68,7 @@ const StoreItems = () => {
     <>
       <Header />
       <Banner />
-      <StoresSection products={megaData} size="3columns" />
+      <Products products={megaData} />
     </>
   )
 }

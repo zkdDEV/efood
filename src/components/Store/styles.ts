@@ -2,17 +2,11 @@ import styled from 'styled-components'
 import { colors } from '../../styles'
 import { Link } from 'react-router-dom'
 
-type Props = {
-  modeldesign: 'stores' | 'foods'
-}
-
-export const Content = styled.div<Props>`
+export const Content = styled.div`
   padding: 8px;
   margin: 0;
-  background-color: ${(props) =>
-    props.modeldesign === 'stores' ? colors.white : colors.red};
-  color: ${(props) =>
-    props.modeldesign === 'stores' ? colors.red : colors.lightYellow};
+  background-color: ${colors.white};
+  color: ${colors.red};
 
   div {
     display: flex;
@@ -26,7 +20,7 @@ export const Content = styled.div<Props>`
     }
   }
 `
-export const Card = styled.div<Props>`
+export const Card = styled.div`
   position: relative;
 `
 
@@ -64,7 +58,7 @@ export const Button = styled(Link)`
   font-weight: bold;
 `
 
-export const AddButton = styled.button`
+export const AboutButton = styled.button`
   width: 100%;
   color: ${colors.red};
   background-color: ${colors.lightYellow};
