@@ -1,12 +1,22 @@
+import { Data } from '../../pages/Home'
 import * as S from './styles'
 
-const Banner = () => {
+type Props = {
+  bannerConfig: Data
+}
+
+const Banner = ({ bannerConfig }: Props) => {
   return (
-    <S.BannerContainer>
+    <S.BannerContainer
+      style={{
+        backgroundImage: `url(${bannerConfig.capa})`
+      }}
+    >
       <div className="container">
-        <S.TypeFood>Italiana</S.TypeFood>
-        <S.StoreName>La Dolce Vita Trattoria</S.StoreName>
+        <S.TypeFood>{bannerConfig.tipo}</S.TypeFood>
+        <S.StoreName>{bannerConfig.titulo}</S.StoreName>
       </div>
+      <div className="overlay"></div>
     </S.BannerContainer>
   )
 }

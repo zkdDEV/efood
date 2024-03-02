@@ -1,74 +1,45 @@
-import { Data } from '../../models/Data'
+import { useNavigate, useParams } from 'react-router-dom'
+import { Data } from '../Home'
+import { useEffect, useState } from 'react'
+import logo from '../../assets/images/logo.svg'
 
 import Header from '../../components/Header'
 import Banner from '../../components/Banner'
 import Products from '../../components/Products'
-
-import pizza from '../../assets/images/pizza_marguerita.png'
-
-const megaData: Data[] = [
-  {
-    key: 1,
-    image: pizza,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    infos: ['Italiana'],
-    note: '4.6',
-    title: 'Pizza Marguerita'
-  },
-  {
-    key: 2,
-    image: pizza,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    infos: ['Italiana'],
-    note: '4.6',
-    title: 'Pizza Marguerita'
-  },
-  {
-    key: 3,
-    image: pizza,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    infos: ['Italiana'],
-    note: '4.6',
-    title: 'Pizza Marguerita'
-  },
-  {
-    key: 4,
-    image: pizza,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    infos: ['Italiana'],
-    note: '4.6',
-    title: 'Pizza Marguerita'
-  },
-  {
-    key: 5,
-    image: pizza,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    infos: ['Italiana'],
-    note: '4.6',
-    title: 'Pizza Marguerita'
-  },
-  {
-    key: 6,
-    image: pizza,
-    description:
-      'A clássica Marguerita: molho de tomate suculento, mussarela derretida, manjericão fresco e um toque de azeite. Sabor e simplicidade!',
-    infos: ['Italiana'],
-    note: '4.6',
-    title: 'Pizza Marguerita'
-  }
-]
+import Footer from '../../components/Footer'
+import { ErrorResponseContainer } from './styles'
 
 const StoreItems = () => {
+  const navigate = useNavigate()
+  const { id } = useParams()
+
+  const [products, setProducts] = useState<Data>()
+
+  useEffect(() => {
+    fetch(`https://fake-api-tau.vercel.app/api/efood/restaurantes/${id}`)
+      .then((resposta) => resposta.json())
+      .then((respostaJSON) => setProducts(respostaJSON))
+  }, [id])
+
+  if (!products) {
+    return (
+      <ErrorResponseContainer>
+        <div className="container">
+          <img src={logo} alt="Logo da Efood" />
+          <h2>Infelizmente os dados do restaurante estão incompletos!</h2>
+          <p>Pedimos desculpas pelo inconveniente</p>
+          <button onClick={() => navigate('/')}>Retornar</button>
+        </div>
+      </ErrorResponseContainer>
+    )
+  }
+
   return (
     <>
       <Header />
-      <Banner />
-      <Products products={megaData} />
+      <Banner bannerConfig={products} />
+      <Products products={products} />
+      <Footer />
     </>
   )
 }

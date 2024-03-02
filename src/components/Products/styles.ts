@@ -19,6 +19,12 @@ export const Content = styled.div`
   background-color: ${colors.red};
   color: ${colors.lightYellow};
 
+  img {
+    width: 304px;
+    height: 167px;
+    object-fit: cover;
+  }
+
   div {
     display: flex;
     justify-content: space-between;
@@ -52,6 +58,7 @@ export const ModalContainer = styled.div`
   display: none;
   justify-content: center;
   align-items: center;
+  z-index: 1;
 
   &.visible {
     display: flex;

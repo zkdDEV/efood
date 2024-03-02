@@ -4,20 +4,29 @@ import Tag from '../Tag'
 
 type Props = {
   image: string
-  infos: string[]
   title: string
-  note: string
+  note: number
   description: string
+  outstanding: boolean
+  type: string
+  id: number
 }
 
-const Product = ({ image, infos, title, note, description }: Props) => {
+const Product = ({
+  image,
+  title,
+  note,
+  description,
+  outstanding,
+  type,
+  id
+}: Props) => {
   return (
     <S.Card>
       <img src={image} alt="Comida/Alimento" />
       <S.Infos>
-        {infos.map((info) => (
-          <Tag key={info}>{info}</Tag>
-        ))}
+        {outstanding && <Tag>Destaque da semana</Tag>}
+        <Tag>{type}</Tag>
       </S.Infos>
       <S.Content>
         <div>
@@ -28,7 +37,7 @@ const Product = ({ image, infos, title, note, description }: Props) => {
           </div>
         </div>
         <S.Description>{description}</S.Description>
-        <S.Button to="/products">Saiba mais</S.Button>
+        <S.Button to={`/products/${id}`}>Saiba mais</S.Button>
       </S.Content>
     </S.Card>
   )

@@ -1,64 +1,102 @@
-import { Data } from '../../models/Data'
-import image from '../../assets/images/pizza_marguerita.png'
-import fechar from '../../assets/images/fechar.svg'
-import * as S from './styles'
+import { Data } from '../../pages/Home'
+import { priceFormat } from '../../styles'
 import { useState } from 'react'
 
+import fechar from '../../assets/images/fechar.svg'
+
+import * as S from './styles'
+
 type Props = {
-  products: Data[]
+  products: Data
 }
+
+type ModalData = {
+  isVisible: boolean
+  url: string
+  name: string
+  description: string
+  size: string
+  price: number
+}
+
 const Products = ({ products }: Props) => {
-  const [modalAberta, setModalAberta] = useState(false)
+  const [modal, setModal] = useState<ModalData>({
+    isVisible: false,
+    url: '',
+    name: '',
+    description: '',
+    size: '',
+    price: 0
+  })
+
+  if (!products) {
+    return <h3>Carregando...</h3>
+  }
+
+  function closeModal() {
+    setModal({
+      isVisible: false,
+      url: '',
+      name: '',
+      description: '',
+      size: '',
+      price: 0
+    })
+  }
 
   return (
     <>
       <S.Section>
         <div className="container">
-          {products.map((p) => (
-            <S.Content key={p.key}>
-              <img src={p.image} alt="Comida/Alimento" />
+          {products.cardapio.map((product) => (
+            <S.Content key={product.id}>
+              <img src={product.foto} alt="Comida/Alimento" />
               <div>
-                <S.Title>{p.title}</S.Title>
+                <S.Title>{product.nome}</S.Title>
               </div>
-              <S.Description>{p.description}</S.Description>
-              <S.AboutButton onClick={() => setModalAberta(true)}>
+              <S.Description>{product.descricao}</S.Description>
+              <S.AboutButton
+                onClick={() =>
+                  setModal({
+                    isVisible: true,
+                    url: product.foto,
+                    name: product.nome,
+                    description: product.descricao,
+                    size: product.porcao,
+                    price: product.preco
+                  })
+                }
+              >
                 Mais detalhes
               </S.AboutButton>
             </S.Content>
           ))}
         </div>
       </S.Section>
-      <S.ModalContainer className={modalAberta ? 'visible' : ''}>
+      <S.ModalContainer className={modal.isVisible ? 'visible' : ''}>
         <div className="container">
           <S.CloseContainer>
-            <span onClick={() => setModalAberta(false)}>
+            <span onClick={() => closeModal()}>
               <img src={fechar} alt="Ícone de fechar" />
             </span>
           </S.CloseContainer>
           <S.ModalContent>
-            <img src={image} alt="" />
+            <img src={modal.url} alt="Imagem do Alimento/Comida" />
             <div>
-              <h3>Pizza Marguerita</h3>
+              <h3>{modal.name}</h3>
               <p>
-                A pizza Margherita é uma pizza clássica da culinária italiana,
-                reconhecida por sua simplicidade e sabor inigualável. Ela é
-                feita com uma base de massa fina e crocante, coberta com molho
-                de tomate fresco, queijo mussarela de alta qualidade, manjericão
-                fresco e azeite de oliva extra-virgem. A combinação de sabores é
-                perfeita, com o molho de tomate suculento e ligeiramente ácido,
-                o queijo derretido e cremoso e as folhas de manjericão frescas,
-                que adicionam um toque de sabor herbáceo. É uma pizza simples,
-                mas deliciosa, que agrada a todos os paladares e é uma ótima
-                opção para qualquer ocasião.
+                {modal.description}
                 <br />
                 <br />
-                <span>Serve: de 2 a 3 pessoas</span>
+                <span>Serve: de {modal.size}</span>
               </p>
-              <S.AddButton>Adicionar ao carrinho - R$ 60,90</S.AddButton>
+              <S.AddButton>
+                Adicionar ao carrinho - {priceFormat(modal.price)}
+              </S.AddButton>
             </div>
           </S.ModalContent>
         </div>
-        <div className="overlay" onClick={() => setModalAberta(false)}></div>
+        <div className="overlay" onClick={() => closeModal()}></div>
       </S.ModalContainer>
     </>
   )

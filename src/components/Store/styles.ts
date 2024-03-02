@@ -22,6 +22,12 @@ export const Content = styled.div`
 `
 export const Card = styled.div`
   position: relative;
+
+  > img {
+    width: 472px;
+    height: 217px;
+    object-fit: cover;
+  }
 `
 
 export const Infos = styled.div`

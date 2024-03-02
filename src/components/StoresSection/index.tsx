@@ -1,24 +1,26 @@
-import { Data } from '../../models/Data'
+import { Data } from '../../pages/Home'
 import Store from '../Store'
 import { SectionContainer } from './styles'
 
 export type Props = {
-  products: Data[]
+  stores: Data[]
 }
 
-const StoresSection = ({ products }: Props) => {
+const StoresSection = ({ stores }: Props) => {
   return (
     <>
       <SectionContainer>
         <div className="container">
-          {products.map((p) => (
+          {stores.map((store) => (
             <Store
-              image={p.image}
-              title={p.title}
-              description={p.description}
-              infos={p.infos}
-              key={p.key}
-              note={p.note}
+              image={store.capa}
+              title={store.titulo}
+              description={store.descricao}
+              key={store.id}
+              note={store.avaliacao}
+              outstanding={store.destacado}
+              type={store.tipo}
+              id={store.id}
             />
           ))}
         </div>

@@ -1,5 +1,12 @@
 import { createGlobalStyle } from 'styled-components'
 
+export const priceFormat = (price: number) => {
+  return new Intl.NumberFormat('pt-BR', {
+    style: 'currency',
+    currency: 'BRL'
+  }).format(price)
+}
+
 export const colors = {
   veryLightYellow: '#FFF8F2',
   lightYellow: '#FFEBD9',
