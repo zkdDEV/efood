@@ -1,9 +1,13 @@
-import { useEffect, useState } from 'react'
+import { useGetStoresQuery } from '../../services/api'
+
+import logo from '../../assets/images/logo.svg'
+import { ErrorResponseContainer } from '../../styles'
+
 import Hero from '../../components/Hero'
 import StoresSection from '../../components/StoresSection'
 import Footer from '../../components/Footer'
 
-export type Cardapio = {
+export type Menu = {
   foto: string
   preco: number
   id: number
@@ -20,17 +24,23 @@ export type Data = {
   avaliacao: number
   descricao: string
   capa: string
-  cardapio: Cardapio[]
+  cardapio: Menu[]
 }
 
 const Home = () => {
-  const [stores, setStores] = useState<Data[]>([])
+  const { data: stores } = useGetStoresQuery()
 
-  useEffect(() => {
-    fetch('https://fake-api-tau.vercel.app/api/efood/restaurantes')
-      .then((resposta) => resposta.json())
-      .then((respostaJSON) => setStores(respostaJSON))
-  }, [])
+  if (stores === undefined) {
+    return (
+      <ErrorResponseContainer>
+        <div className="container">
+          <img src={logo} alt="Logo da Efood" />
+          <h2>Infelizmente ocorreu algum erro no nosso site!</h2>
+          <p>Tente entrar novamente mais tarde</p>
+        </div>
+      </ErrorResponseContainer>
+    )
+  }
 
   return (
     <>

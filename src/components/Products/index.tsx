@@ -1,32 +1,35 @@
-import { Data } from '../../pages/Home'
+import { Menu } from '../../pages/Home'
 import { priceFormat } from '../../styles'
+import { useDispatch } from 'react-redux'
 import { useState } from 'react'
 
 import fechar from '../../assets/images/fechar.svg'
 
 import * as S from './styles'
+import { add, open } from '../../store/reducers/cart'
 
 type Props = {
-  products: Data
+  products: Menu[]
 }
 
 type ModalData = {
   isVisible: boolean
-  url: string
-  name: string
-  description: string
-  size: string
-  price: number
+  item: Menu
 }
 
 const Products = ({ products }: Props) => {
+  const dispatch = useDispatch()
+
   const [modal, setModal] = useState<ModalData>({
     isVisible: false,
-    url: '',
-    name: '',
-    description: '',
-    size: '',
-    price: 0
+    item: {
+      foto: '',
+      descricao: '',
+      id: 0,
+      nome: '',
+      porcao: '',
+      preco: 0
+    }
   })
 
   if (!products) {
@@ -36,19 +39,26 @@ const Products = ({ products }: Props) => {
   function closeModal() {
     setModal({
       isVisible: false,
-      url: '',
-      name: '',
-      description: '',
-      size: '',
-      price: 0
+      item: {
+        foto: '',
+        descricao: '',
+        id: 0,
+        nome: '',
+        porcao: '',
+        preco: 0
+      }
     })
+  }
+  function addToCart(item: Menu) {
+    dispatch(add(item))
+    dispatch(open())
   }
 
   return (
     <>
       <S.Section>
         <div className="container">
-          {products.cardapio.map((product) => (
+          {products.map((product) => (
             <S.Content key={product.id}>
               <img src={product.foto} alt="Comida/Alimento" />
               <div>
@@ -59,11 +69,14 @@ const Products = ({ products }: Props) => {
                 onClick={() =>
                   setModal({
                     isVisible: true,
-                    url: product.foto,
-                    name: product.nome,
-                    description: product.descricao,
-                    size: product.porcao,
-                    price: product.preco
+                    item: {
+                      foto: product.foto,
+                      descricao: product.descricao,
+                      id: product.id,
+                      nome: product.nome,
+                      porcao: product.porcao,
+                      preco: product.preco
+                    }
                   })
                 }
               >
@@ -81,17 +94,22 @@ const Products = ({ products }: Props) => {
             </span>
           </S.CloseContainer>
           <S.ModalContent>
-            <img src={modal.url} alt="Imagem do Alimento/Comida" />
+            <img src={modal.item.foto} alt="Imagem do Alimento/Comida" />
             <div>
-              <h3>{modal.name}</h3>
+              <h3>{modal.item.nome}</h3>
               <p>
-                {modal.description}
+                {modal.item.descricao}
                 <br />
                 <br />
-                <span>Serve: de {modal.size}</span>
+                <span>Serve: de {modal.item.porcao}</span>
               </p>
-              <S.AddButton>
-                Adicionar ao carrinho - {priceFormat(modal.price)}
+              <S.AddButton
+                onClick={() => {
+                  addToCart(modal.item)
+                  closeModal()
+                }}
+              >
+                Adicionar ao carrinho - {priceFormat(modal.item.preco)}
               </S.AddButton>
             </div>
           </S.ModalContent>
