@@ -1,6 +1,6 @@
 import styled from 'styled-components'
 import background_hero from '../../assets/images/hero_background.png'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const HeroContainer = styled.div`
   background-image: url(${background_hero});
@@ -18,4 +18,9 @@ export const Quote = styled.h2`
   color: ${colors.red};
   margin-top: 144px;
   font-weight: 900;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    margin-top: 32px;
+    font-size: 24px;
+  }
 `

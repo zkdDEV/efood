@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const AsideContainer = styled.div`
   position: fixed;
@@ -41,6 +41,15 @@ export const AsideContainer = styled.div`
       margin-right: 360px;
       text-transform: uppercase;
       opacity: 0.6;
+
+      @media (max-width: ${breakpoints.desktop}) {
+        padding: 0 24px;
+        text-align: center;
+      }
+
+      @media (max-width: ${breakpoints.tablet}) {
+        display: none;
+      }
     }
   }
 `

@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 import { Link } from 'react-router-dom'
 
 export const Content = styled.div`
@@ -27,6 +27,10 @@ export const Card = styled.div`
     width: 472px;
     height: 217px;
     object-fit: cover;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      width: 100%;
+    }
   }
 `
 

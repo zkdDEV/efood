@@ -1,4 +1,5 @@
 import styled from 'styled-components'
+import { breakpoints } from '../../styles'
 
 export const SectionContainer = styled.section`
   padding-top: 80px;
@@ -10,5 +11,9 @@ export const SectionContainer = styled.section`
     column-gap: 80px;
     row-gap: 48px;
     overflow: auto;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      grid-template-columns: 1fr;
+    }
   }
 `

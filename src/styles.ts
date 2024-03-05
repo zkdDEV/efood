@@ -1,6 +1,11 @@
 import styled, { createGlobalStyle } from 'styled-components'
 import background from './assets/images/hero_background.png'
 
+export const breakpoints = {
+  desktop: '1024px',
+  tablet: '768px'
+}
+
 export const priceFormat = (price: number) => {
   return new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -31,6 +36,14 @@ const GlobalStyle = createGlobalStyle`
     .container {
       max-width: 1024px;
       margin: 0 auto;
+
+      @media (max-width: ${breakpoints.desktop}){
+        padding: 0 80px;
+      }
+
+      @media (max-width: ${breakpoints.tablet}){
+        padding: 0 40px;
+      }
     }
   }
 `

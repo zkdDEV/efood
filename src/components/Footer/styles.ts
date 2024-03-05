@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const FooterContainer = styled.footer`
   background-color: ${colors.lightYellow};
@@ -16,6 +16,12 @@ export const Links = styled.ul`
 export const Link = styled.li`
   margin-right: 8px;
   cursor: pointer;
+
+  @media (max-width: ${breakpoints.tablet}) {
+    img {
+      transform: scale(1.2);
+    }
+  }
 `
 
 export const DescriptionContainer = styled.div`
@@ -24,4 +30,8 @@ export const DescriptionContainer = styled.div`
   padding-top: 80px;
   font-size: 10px;
   color: ${colors.red};
+
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 12px;
+  }
 `

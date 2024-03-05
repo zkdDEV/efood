@@ -1,5 +1,5 @@
 import styled from 'styled-components'
-import { colors } from '../../styles'
+import { breakpoints, colors } from '../../styles'
 
 export const Section = styled.section`
   padding-top: 56px;
@@ -11,6 +11,10 @@ export const Section = styled.section`
     column-gap: 32px;
     row-gap: 32px;
     overflow: auto;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      grid-template-columns: 1fr;
+    }
   }
 `
 export const Content = styled.div`
@@ -23,6 +27,15 @@ export const Content = styled.div`
     width: 304px;
     height: 167px;
     object-fit: cover;
+
+    @media (max-width: ${breakpoints.desktop}) {
+      width: 100%;
+      height: 300px;
+    }
+
+    @media (max-width: ${breakpoints.tablet}) {
+      height: 244px;
+    }
   }
 
   div {
@@ -41,6 +54,10 @@ export const Content = styled.div`
 export const Title = styled.h3`
   font-size: 18px;
   font-weight: bold;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    font-size: 24px;
+  }
 `
 
 export const Description = styled.p`
@@ -60,6 +77,10 @@ export const ModalContainer = styled.div`
   align-items: center;
   z-index: 1;
 
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 0 24px;
+  }
+
   &.visible {
     display: flex;
   }
@@ -69,6 +90,12 @@ export const ModalContainer = styled.div`
     padding: 8px;
     height: 344px;
     z-index: 1;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      display: flex;
+      flex-direction: column;
+      height: 570px;
+    }
   }
 
   .overlay {
@@ -96,13 +123,23 @@ export const ModalContent = styled.div`
   height: 312px;
   color: ${colors.white};
 
+  @media (max-width: ${breakpoints.tablet}) {
+    flex-direction: column;
+  }
+
   img {
     object-fit: cover;
     width: 280px;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      width: 100%;
+    }
   }
 
   div {
-    padding-left: 24px;
+    @media (max-width: ${breakpoints.tablet}) {
+      padding-top: 24px;
+    }
 
     h3 {
       font-size: 18px;
@@ -130,4 +167,13 @@ export const AboutButton = styled(AddButton)`
   color: ${colors.red};
   background-color: ${colors.lightYellow};
   padding: 4px 0;
+
+  @media (max-width: ${breakpoints.desktop}) {
+    padding: 8px 0;
+    font-size: 18px;
+  }
+
+  @media (max-width: ${breakpoints.tablet}) {
+    font-size: 16px;
+  }
 `
