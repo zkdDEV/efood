@@ -3,7 +3,7 @@ import background from './assets/images/hero_background.png'
 
 export const breakpoints = {
   desktop: '1024px',
-  tablet: '768px'
+  tablet: '700px'
 }
 
 export const priceFormat = (price: number) => {

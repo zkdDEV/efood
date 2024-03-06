@@ -125,6 +125,7 @@ export const ModalContent = styled.div`
 
   @media (max-width: ${breakpoints.tablet}) {
     flex-direction: column;
+    padding: 0%, 16px 16px 16px;
   }
 
   img {
@@ -133,12 +134,17 @@ export const ModalContent = styled.div`
 
     @media (max-width: ${breakpoints.tablet}) {
       width: 100%;
+      height: 244px;
     }
   }
 
   div {
+    padding-left: 24px;
+
     @media (max-width: ${breakpoints.tablet}) {
-      padding-top: 24px;
+      padding-left: 0;
+      padding-top: 8px;
+      width: 100%;
     }
 
     h3 {
@@ -150,6 +156,10 @@ export const ModalContent = styled.div`
       font-size: 14px;
       line-height: 22px;
       padding: 16px 0;
+
+      @media (max-width: ${breakpoints.tablet}) {
+        padding: 8px 0;
+      }
     }
   }
 `

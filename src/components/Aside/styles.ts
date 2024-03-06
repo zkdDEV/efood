@@ -20,6 +20,13 @@ export const AsideContainer = styled.div`
     background-color: ${colors.red};
     height: 100%;
     z-index: 1;
+
+    @media (max-width: ${breakpoints.tablet}) {
+      width: 304px;
+      position: fixed;
+      top: 0;
+      right: 0;
+    }
   }
 
   .overlay {
