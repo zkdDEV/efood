@@ -8,7 +8,7 @@ import Header from '../../components/Header'
 import Banner from '../../components/Banner'
 import Products from '../../components/Products'
 import Footer from '../../components/Footer'
-import Aside from '../../components/Aside'
+import Cart from '../../components/Cart'
 
 const StoreItems = () => {
   const navigate = useNavigate()
@@ -20,7 +20,7 @@ const StoreItems = () => {
       <ErrorResponseContainer>
         <div className="container">
           <img src={logo} alt="Logo da Efood" />
-          <h2>Infelizmente os dados do restaurante estão incompletos!</h2>
+          <h2>Infelizmente os dados do restaurante podem estar incompletos!</h2>
           <p>Pedimos desculpas pelo inconveniente</p>
           <button onClick={() => navigate('/')}>Retornar</button>
         </div>
@@ -34,7 +34,7 @@ const StoreItems = () => {
       <Banner bannerConfig={products} />
       <Products products={products.cardapio} />
       <Footer />
-      <Aside />
+      <Cart />
     </>
   )
 }

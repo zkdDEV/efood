@@ -7,6 +7,7 @@ import fechar from '../../assets/images/fechar.svg'
 
 import * as S from './styles'
 import { add, open } from '../../store/reducers/cart'
+import { setDescriptionSize } from '../../utils'
 
 type Props = {
   products: Menu[]
@@ -64,7 +65,9 @@ const Products = ({ products }: Props) => {
               <div>
                 <S.Title>{product.nome}</S.Title>
               </div>
-              <S.Description>{product.descricao}</S.Description>
+              <S.Description>
+                {setDescriptionSize(product.descricao)}
+              </S.Description>
               <S.AboutButton
                 onClick={() =>
                   setModal({

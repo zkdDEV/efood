@@ -17,7 +17,8 @@ export const colors = {
   veryLightYellow: '#FFF8F2',
   lightYellow: '#FFEBD9',
   red: '#E66767',
-  white: '#FFFFFF'
+  white: '#FFFFFF',
+  black: '#4B4B4B'
 }
 
 const GlobalStyle = createGlobalStyle`

@@ -10,7 +10,7 @@ export const SectionContainer = styled.section`
     grid-template-columns: 1fr 1fr;
     column-gap: 80px;
     row-gap: 48px;
-    overflow: auto;
+    grid-template-areas: 100px;
 
     @media (max-width: ${breakpoints.desktop}) {
       grid-template-columns: 1fr;
