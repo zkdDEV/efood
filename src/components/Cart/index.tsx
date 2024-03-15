@@ -111,6 +111,38 @@ const Cart = () => {
     return total
   }
 
+  const buttonNotAllowed = (
+    name: string,
+    address: string,
+    city: string,
+    zipCode: string,
+    number: string
+  ) => {
+    const nameTouch = name in formik.touched
+    const addressTouch = address in formik.touched
+    const cityTouch = city in formik.touched
+    const zipCodeTouch = zipCode in formik.touched
+    const numberTouch = number in formik.touched
+    const nameError = name in formik.errors
+    const addressError = address in formik.errors
+    const cityError = city in formik.errors
+    const zipCodeError = zipCode in formik.errors
+    const numberError = number in formik.errors
+
+    const hasTouch =
+      nameTouch && addressTouch && cityTouch && zipCodeTouch && numberTouch
+    const hasError =
+      nameError && addressError && cityError && zipCodeError && numberError
+
+    if (hasTouch === false || hasError === true) {
+      return true
+    } else if (hasTouch && hasError) {
+      return true
+    } else if (hasTouch === true && hasError === false) {
+      false
+    }
+  }
+
   useEffect(() => {
     if (isSuccess) {
       dispatch(clear())
@@ -208,7 +240,7 @@ const Cart = () => {
                   <S.InputsGroup>
                     <div>
                       <label htmlFor="zipCode">CEP</label>
-                      <InputMask
+                      <input
                         id="zipCode"
                         type="string"
                         name="zipCode"
@@ -216,14 +248,13 @@ const Cart = () => {
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         className={checkInputHasError('zipCode') ? 'error' : ''}
-                        mask="99999-999"
                       />
                     </div>
                     <div>
                       <label className="mobileConfiguration" htmlFor="number">
                         Número
                       </label>
-                      <InputMask
+                      <input
                         id="number"
                         type="text"
                         name="number"
@@ -231,7 +262,6 @@ const Cart = () => {
                         onChange={formik.handleChange}
                         onBlur={formik.handleBlur}
                         className={checkInputHasError('number') ? 'error' : ''}
-                        mask="(99) 99999-9999"
                       />
                     </div>
                   </S.InputsGroup>
@@ -253,8 +283,29 @@ const Cart = () => {
                     onClick={() => {
                       setIsOpenDeliveryForm(false)
                     }}
-                    className="margin-top"
+                    className={
+                      buttonNotAllowed(
+                        'name',
+                        'address',
+                        'city',
+                        'zipCode',
+                        'number'
+                      )
+                        ? 'margin-top buttonDisabled'
+                        : 'margin-top'
+                    }
                     type="button"
+                    disabled={
+                      buttonNotAllowed(
+                        'name',
+                        'address',
+                        'city',
+                        'zipCode',
+                        'number'
+                      )
+                        ? true
+                        : false
+                    }
                   >
                     Continuar com pagamento
                   </S.Button>
