@@ -102,6 +102,11 @@ export const Button = styled.button`
   font-weight: bold;
   font-size: 14px;
   cursor: pointer;
+
+  &.buttonDisabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+  }
 `
 export const MessageContainer = styled.div`
   height: 100%;
