@@ -123,22 +123,26 @@ const Cart = () => {
     const cityTouch = city in formik.touched
     const zipCodeTouch = zipCode in formik.touched
     const numberTouch = number in formik.touched
-    const nameError = name in formik.errors
-    const addressError = address in formik.errors
-    const cityError = city in formik.errors
-    const zipCodeError = zipCode in formik.errors
-    const numberError = number in formik.errors
+    const nameComplete = formik.values.name.length >= 3
+    const addressComplete = formik.values.address.length >= 3
+    const cityComplete = formik.values.city.length >= 3
+    const zipCodeComplete = formik.values.zipCode.length == 8
+    const numberComplete = formik.values.number.length == 11
 
     const hasTouch =
       nameTouch && addressTouch && cityTouch && zipCodeTouch && numberTouch
-    const hasError =
-      nameError && addressError && cityError && zipCodeError && numberError
+    const isComplete =
+      nameComplete &&
+      addressComplete &&
+      cityComplete &&
+      zipCodeComplete &&
+      numberComplete
 
-    if (hasTouch === false || hasError === true) {
+    if (hasTouch === false && isComplete === false) {
       return true
-    } else if (hasTouch && hasError) {
+    } else if (hasTouch === true && isComplete === false) {
       return true
-    } else if (hasTouch === true && hasError === false) {
+    } else if (hasTouch === true && isComplete === true) {
       false
     }
   }
@@ -474,6 +478,7 @@ const Cart = () => {
           setIsOpenCartContent(true)
           setIsOpenDeliveryForm(true)
           setIsOpenForm(false)
+          setIsFinalized(false)
         }}
         className="overlay"
       >
